@@ -1,0 +1,250 @@
+window.CLASES = {
+  "inicio": "2026-10-19",
+  "voz": "hr-HR",
+  "clases": [
+    {
+      "n": 1,
+      "titulo": "Saludos y cortesía",
+      "objetivo": "Saludar, despedirte y dar las gracias.",
+      "frases": [
+        { "id": "c01f1", "hr": "Dobar dan.", "es": "Buenos días / buenas tardes." },
+        { "id": "c01f2", "hr": "Doviđenja.", "es": "Adiós." },
+        { "id": "c01f3", "hr": "Hvala lijepo.", "es": "Muchas gracias." }
+      ],
+      "palabras": [
+        { "id": "c01p1", "hr": "molim", "es": "por favor / de nada" },
+        { "id": "c01p2", "hr": "izvolite", "es": "aquí tiene / dígame" },
+        { "id": "c01p3", "hr": "oprostite", "es": "disculpe" }
+      ],
+      "drill": { "id": "c01d", "pregunta": "¿Cómo se dice «gracias»?", "respuesta": "Hvala.", "es": "Gracias." }
+    },
+    {
+      "n": 2,
+      "titulo": "Presentarse",
+      "objetivo": "Decir tu nombre y preguntar el del otro.",
+      "frases": [
+        { "id": "c02f1", "hr": "Ja sam Ana.", "es": "Soy Ana." },
+        { "id": "c02f2", "hr": "Kako se zovete?", "es": "¿Cómo se llama? (formal)" },
+        { "id": "c02f3", "hr": "Drago mi je.", "es": "Encantado / encantada." }
+      ],
+      "palabras": [
+        { "id": "c02p1", "hr": "ime", "es": "nombre" },
+        { "id": "c02p2", "hr": "ja", "es": "yo" },
+        { "id": "c02p3", "hr": "vi", "es": "usted / vosotros" }
+      ],
+      "drill": { "id": "c02d", "pregunta": "¿Cómo dices «Soy de Perú»?", "respuesta": "Ja sam iz Perua.", "es": "Soy de Perú." }
+    },
+    {
+      "n": 3,
+      "titulo": "Cuando no entiendes",
+      "objetivo": "Pedir que repitan y decir que no entiendes.",
+      "frases": [
+        { "id": "c03f1", "hr": "Ne razumijem.", "es": "No entiendo." },
+        { "id": "c03f2", "hr": "Možete li ponoviti?", "es": "¿Puede repetir?" },
+        { "id": "c03f3", "hr": "Govorite li hrvatski?", "es": "¿Habla croata?" }
+      ],
+      "palabras": [
+        { "id": "c03p1", "hr": "hrvatski", "es": "croata" },
+        { "id": "c03p2", "hr": "polako", "es": "despacio" },
+        { "id": "c03p3", "hr": "engleski", "es": "inglés" }
+      ],
+      "drill": { "id": "c03d", "pregunta": "¿Cómo pides que hablen más despacio?", "respuesta": "Polako, molim.", "es": "Más despacio, por favor." }
+    },
+    {
+      "n": 4,
+      "titulo": "Números y precios",
+      "objetivo": "Preguntar cuánto cuesta y pagar.",
+      "frases": [
+        { "id": "c04f1", "hr": "Koliko košta?", "es": "¿Cuánto cuesta?" },
+        { "id": "c04f2", "hr": "Deset eura.", "es": "Diez euros." },
+        { "id": "c04f3", "hr": "Mogu li platiti karticom?", "es": "¿Puedo pagar con tarjeta?" }
+      ],
+      "palabras": [
+        { "id": "c04p1", "hr": "jedan", "es": "uno" },
+        { "id": "c04p2", "hr": "sedam", "es": "siete" },
+        { "id": "c04p3", "hr": "sto", "es": "cien" }
+      ],
+      "drill": { "id": "c04d", "pregunta": "¿Cómo se dice «diez»?", "respuesta": "Deset.", "es": "Diez." }
+    },
+    {
+      "n": 5,
+      "titulo": "En el café",
+      "objetivo": "Pedir un café y luego la cuenta.",
+      "frases": [
+        { "id": "c05f1", "hr": "Kavu, molim.", "es": "Un café, por favor." },
+        { "id": "c05f2", "hr": "Kavu s mlijekom, molim.", "es": "Café con leche, por favor." },
+        { "id": "c05f3", "hr": "Račun, molim.", "es": "La cuenta, por favor." }
+      ],
+      "palabras": [
+        { "id": "c05p1", "hr": "voda", "es": "agua" },
+        { "id": "c05p2", "hr": "sok", "es": "zumo" },
+        { "id": "c05p3", "hr": "šećer", "es": "azúcar" }
+      ],
+      "drill": { "id": "c05d", "pregunta": "¿Cómo pides el café sin azúcar?", "respuesta": "Bez šećera, molim.", "es": "Sin azúcar, por favor." }
+    },
+    {
+      "n": 6,
+      "titulo": "En el restaurante",
+      "objetivo": "Pedir el menú, recomendación y valorar la comida.",
+      "frases": [
+        { "id": "c06f1", "hr": "Jelovnik, molim.", "es": "El menú, por favor." },
+        { "id": "c06f2", "hr": "Što preporučujete?", "es": "¿Qué recomienda?" },
+        { "id": "c06f3", "hr": "Hvala, bilo je ukusno.", "es": "Gracias, estaba delicioso." }
+      ],
+      "palabras": [
+        { "id": "c06p1", "hr": "riba", "es": "pescado" },
+        { "id": "c06p2", "hr": "meso", "es": "carne" },
+        { "id": "c06p3", "hr": "juha", "es": "sopa" }
+      ],
+      "drill": { "id": "c06d", "pregunta": "¿Cómo dices «Yo tomaría pescado»?", "respuesta": "Ja bih ribu.", "es": "Yo tomaría pescado." }
+    },
+    {
+      "n": 7,
+      "titulo": "Preguntar direcciones",
+      "objetivo": "Preguntar dónde está algo y entender la respuesta.",
+      "frases": [
+        { "id": "c07f1", "hr": "Gdje je muzej?", "es": "¿Dónde está el museo?" },
+        { "id": "c07f2", "hr": "Lijevo ili desno?", "es": "¿Izquierda o derecha?" },
+        { "id": "c07f3", "hr": "Je li to daleko?", "es": "¿Está lejos?" }
+      ],
+      "palabras": [
+        { "id": "c07p1", "hr": "ravno", "es": "recto" },
+        { "id": "c07p2", "hr": "blizu", "es": "cerca" },
+        { "id": "c07p3", "hr": "toalet", "es": "aseo" }
+      ],
+      "drill": { "id": "c07d", "pregunta": "¿Cómo preguntas por el baño?", "respuesta": "Gdje je toalet?", "es": "¿Dónde está el aseo?" }
+    },
+    {
+      "n": 8,
+      "titulo": "Transporte",
+      "objetivo": "Comprar un billete y preguntar por la salida.",
+      "frases": [
+        { "id": "c08f1", "hr": "Gdje je kolodvor?", "es": "¿Dónde está la estación?" },
+        { "id": "c08f2", "hr": "Kartu do Splita, molim.", "es": "Un billete a Split, por favor." },
+        { "id": "c08f3", "hr": "Kada polazi vlak?", "es": "¿Cuándo sale el tren?" }
+      ],
+      "palabras": [
+        { "id": "c08p1", "hr": "vlak", "es": "tren" },
+        { "id": "c08p2", "hr": "autobus", "es": "autobús" },
+        { "id": "c08p3", "hr": "trajekt", "es": "ferri" }
+      ],
+      "drill": { "id": "c08d", "pregunta": "¿Cómo pides «un billete, por favor»?", "respuesta": "Kartu, molim.", "es": "Un billete, por favor." }
+    },
+    {
+      "n": 9,
+      "titulo": "En el hotel",
+      "objetivo": "Registrarte y preguntar por los servicios.",
+      "frases": [
+        { "id": "c09f1", "hr": "Imam rezervaciju.", "es": "Tengo una reserva." },
+        { "id": "c09f2", "hr": "Soba za dvije noći.", "es": "Habitación por dos noches." },
+        { "id": "c09f3", "hr": "U koliko sati je doručak?", "es": "¿A qué hora es el desayuno?" }
+      ],
+      "palabras": [
+        { "id": "c09p1", "hr": "ključ", "es": "llave" },
+        { "id": "c09p2", "hr": "soba", "es": "habitación" },
+        { "id": "c09p3", "hr": "noć", "es": "noche" }
+      ],
+      "drill": { "id": "c09d", "pregunta": "¿Cómo preguntas si hay internet?", "respuesta": "Ima li internet?", "es": "¿Hay internet?" }
+    },
+    {
+      "n": 10,
+      "titulo": "Días y horas",
+      "objetivo": "Situar las cosas en el tiempo y quedar.",
+      "frases": [
+        { "id": "c10f1", "hr": "Danas, sutra, jučer.", "es": "Hoy, mañana, ayer." },
+        { "id": "c10f2", "hr": "Koliko je sati?", "es": "¿Qué hora es?" },
+        { "id": "c10f3", "hr": "Vidimo se u pet.", "es": "Nos vemos a las cinco." }
+      ],
+      "palabras": [
+        { "id": "c10p1", "hr": "ponedjeljak", "es": "lunes" },
+        { "id": "c10p2", "hr": "petak", "es": "viernes" },
+        { "id": "c10p3", "hr": "nedjelja", "es": "domingo" }
+      ],
+      "drill": { "id": "c10d", "pregunta": "¿Cómo dices «nos vemos mañana»?", "respuesta": "Vidimo se sutra.", "es": "Nos vemos mañana." }
+    }
+  ]
+}
+;
+window.VISUALES = {
+  "c01f1": ["👋", "menear"],
+  "c01f2": ["🚶", "deslizar"],
+  "c01f3": ["🙏", "latir"],
+  "c01p1": ["🤲", "latir"],
+  "c01p2": ["🎁", "menear"],
+  "c01p3": ["🙇", "flotar"],
+  "c01d": ["🙏", "rebotar"],
+
+  "c02f1": ["🙋", "menear"],
+  "c02f2": ["❓", "rebotar"],
+  "c02f3": ["🤝", "temblar"],
+  "c02p1": ["📛", "latir"],
+  "c02p2": ["👤", "flotar"],
+  "c02p3": ["👥", "flotar"],
+  "c02d": ["🇵🇪", "latir"],
+
+  "c03f1": ["🤷", "menear"],
+  "c03f2": ["🔄", "girar"],
+  "c03f3": ["🗣️", "latir"],
+  "c03p1": ["🇭🇷", "menear"],
+  "c03p2": ["🐢", "flotar"],
+  "c03p3": ["🇬🇧", "latir"],
+  "c03d": ["🐢", "flotar"],
+
+  "c04f1": ["💰", "rebotar"],
+  "c04f2": ["💶", "latir"],
+  "c04f3": ["💳", "menear"],
+  "c04p1": ["1️⃣", "latir"],
+  "c04p2": ["7️⃣", "latir"],
+  "c04p3": ["💯", "latir"],
+  "c04d": ["🔟", "latir"],
+
+  "c05f1": ["☕", "vapor"],
+  "c05f2": ["🥛", "vapor"],
+  "c05f3": ["🧾", "menear"],
+  "c05p1": ["💧", "rebotar"],
+  "c05p2": ["🧃", "flotar"],
+  "c05p3": ["🍬", "menear"],
+  "c05d": ["🚫", "temblar"],
+
+  "c06f1": ["📋", "menear"],
+  "c06f2": ["🤔", "latir"],
+  "c06f3": ["😋", "latir"],
+  "c06p1": ["🐟", "nadar"],
+  "c06p2": ["🍖", "rebotar"],
+  "c06p3": ["🍲", "vapor"],
+  "c06d": ["🐟", "nadar"],
+
+  "c07f1": ["🏛️", "latir"],
+  "c07f2": ["↔️", "menear"],
+  "c07f3": ["🗺️", "flotar"],
+  "c07p1": ["⬆️", "flotar"],
+  "c07p2": ["📍", "rebotar"],
+  "c07p3": ["🚻", "latir"],
+  "c07d": ["🚻", "rebotar"],
+
+  "c08f1": ["🚉", "latir"],
+  "c08f2": ["🎫", "menear"],
+  "c08f3": ["🚆", "deslizar"],
+  "c08p1": ["🚆", "deslizar"],
+  "c08p2": ["🚌", "deslizar"],
+  "c08p3": ["⛴️", "flotar"],
+  "c08d": ["🎫", "latir"],
+
+  "c09f1": ["🗓️", "latir"],
+  "c09f2": ["🛏️", "flotar"],
+  "c09f3": ["🍳", "menear"],
+  "c09p1": ["🔑", "menear"],
+  "c09p2": ["🚪", "latir"],
+  "c09p3": ["🌙", "flotar"],
+  "c09d": ["📶", "latir"],
+
+  "c10f1": ["📆", "menear"],
+  "c10f2": ["🕒", "girar"],
+  "c10f3": ["🤝", "menear"],
+  "c10p1": ["📅", "latir"],
+  "c10p2": ["🗓️", "latir"],
+  "c10p3": ["🌞", "latir"],
+  "c10d": ["👋", "flotar"]
+}
+;
+window.IMAGENES = {"c01f1":{"src":"gifs-opt/c01f1.webp","w":240,"h":180},"c01f2":{"src":"gifs-opt/c01f2.webp","w":240,"h":240},"c01f3":{"src":"gifs-opt/c01f3.webp","w":240,"h":240},"c01p1":{"src":"gifs-opt/c01p1.webp","w":240,"h":183},"c01p2":{"src":"gifs-opt/c01p2.webp","w":240,"h":135},"c01p3":{"src":"gifs-opt/c01p3.webp","w":240,"h":240},"c02f1":{"src":"gifs-opt/c02f1.webp","w":240,"h":240},"c02f2":{"src":"gifs-opt/c02f2.webp","w":240,"h":240},"c02f3":{"src":"gifs-opt/c02f3.webp","w":240,"h":241},"c02p1":{"src":"gifs-opt/c02p1.webp","w":240,"h":240},"c02p2":{"src":"gifs-opt/c02p2.webp","w":240,"h":134},"c02p3":{"src":"gifs-opt/c02p3.webp","w":240,"h":181}};

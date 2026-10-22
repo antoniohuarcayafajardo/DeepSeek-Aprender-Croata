@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Croata · clase de 3 minutos</title>
+<style>
+  :root{
+    --bg:#f6f4ef; --card:#fff; --ink:#17202a; --muted:#6b7280;
+    --line:#e6e1d7; --red:#b3122c; --blue:#12496e; --ok:#0f7b4f;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+    line-height:1.45; padding-bottom:48px;
+  }
+  .top{
+    position:sticky; top:0; z-index:5; background:rgba(246,244,239,.94);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+    padding:14px 18px 10px; display:flex; align-items:center; gap:12px;
+  }
+  .top::before{
+    content:""; position:absolute; left:0; right:0; top:0; height:5px;
+    background:repeating-linear-gradient(90deg,var(--red) 0 14px,#fff 14px 28px);
+  }
+  .brand{font-weight:650; letter-spacing:.2px; font-size:15px; margin-top:6px}
+  .brand span{color:var(--red)}
+  .nav{margin-left:auto; display:flex; align-items:center; gap:8px; margin-top:6px}
+  .nav button{
+    width:34px; height:34px; border-radius:9px; border:1px solid var(--line);
+    background:#fff; font-size:18px; cursor:pointer; color:var(--ink);
+  }
+  .nav button:hover{border-color:#c9c2b4}
+  #pos{font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums}
+  main{max-width:720px; margin:0 auto; padding:18px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px; margin:0 0 14px}
+  .kicker{font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--red); font-weight:650}
+  .hero h1{margin:6px 0 4px; font-size:28px; line-height:1.15; letter-spacing:-.02em}
+  .hero p{margin:0; color:var(--muted); font-size:15px}
+  .timer{margin:16px 0 12px; display:flex; align-items:center; gap:12px}
+  .clock{font-size:22px; font-weight:650; font-variant-numeric:tabular-nums; min-width:64px}
+  .bar{flex:1; height:8px; border-radius:99px; background:#eee9df; overflow:hidden}
+  .bar i{display:block; height:100%; width:100%; background:linear-gradient(90deg,var(--blue),var(--red)); transition:width .4s linear}
+  .hero-actions{display:flex; gap:10px; flex-wrap:wrap}
+  .btn{
+    border:1px solid var(--line); background:#fff; color:var(--ink);
+    padding:11px 16px; border-radius:11px; font-size:15px; font-weight:600;
+    cursor:pointer; transition:transform .06s, border-color .15s;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn:hover{border-color:#c9c2b4}
+  .btn.primary{background:var(--blue); border-color:var(--blue); color:#fff}
+  .btn.ok{background:var(--ok); border-color:var(--ok); color:#fff}
+  .btn.ghost{background:transparent}
+  h2.sec{font-size:12px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin:22px 4px 8px}
+  .item{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:10px 12px; margin-bottom:10px;
+  }
+  .linea{display:flex; align-items:center; gap:12px}
+  .item .txt{flex:1; min-width:0}
+  .item .hr{font-size:20px; font-weight:600; letter-spacing:.1px}
+  .item .es{font-size:14px; color:var(--muted)}
+  .item .acts{display:flex; gap:6px}
+  .play{
+    width:46px; height:46px; border-radius:50%; border:1px solid var(--line);
+    background:#fff; font-size:17px; cursor:pointer; display:grid; place-items:center;
+    padding-left:3px;
+  }
+  .play:hover{background:#f3efe7}
+  .play.slow{font-size:15px; padding-left:0; width:40px; height:40px}
+  .item.sonando{border-color:var(--blue); box-shadow:0 0 0 3px rgba(18,73,110,.12)}
+
+  /* --- imagen y animación de cada palabra --- */
+  .mini{
+    position:relative; flex:none; width:52px; height:52px; border-radius:14px;
+    background:linear-gradient(160deg,#fff7e8,#efe6d5); border:1px solid #e8e0cf;
+    display:grid; place-items:center; font-size:28px; line-height:1; padding:0;
+    cursor:pointer; font-family:inherit; color:inherit;
+  }
+  .mini::after{
+    content:"✨"; position:absolute; right:-6px; top:-7px;
+    font-size:11px; line-height:1; padding:1px 2px; border-radius:8px;
+    background:#fff; border:1px solid #e8e0cf;
+  }
+  .mini:hover{background:linear-gradient(160deg,#fff1d8,#e9dfc9)}
+  .item.abierto .mini{background:linear-gradient(160deg,#e9f2f9,#d6e5f2); border-color:#c6d9e9}
+
+  .escena{
+    position:relative; height:150px; margin:10px 0 0; border-radius:14px; overflow:hidden;
+    border:1px solid #eee7da;
+    background:radial-gradient(circle at 50% 42%, #fffdf7 0%, #f7f1e4 62%, #efe7d7 100%);
+    display:grid; place-items:center;
+  }
+  .escena[hidden]{display:none}
+  .escena .g{
+    font-size:82px; line-height:1;
+    filter:drop-shadow(0 10px 10px rgba(70,50,20,.18));
+    animation:aparecer .5s cubic-bezier(.2,1.5,.4,1) both;
+  }
+  .escena .p{position:absolute; font-size:18px; opacity:0; animation:brillo 2.6s ease-in-out infinite}
+  .p1{left:22%; top:32%}
+  .p2{right:22%; top:26%; animation-delay:.9s}
+
+  @keyframes aparecer{from{transform:scale(.25) rotate(-8deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+  @keyframes brillo{0%,100%{opacity:0;transform:scale(.5) translateY(6px)}50%{opacity:.95;transform:scale(1) translateY(-4px)}}
+  @keyframes latir{0%,100%{transform:scale(1)}50%{transform:scale(1.16)}}
+  @keyframes flotar{0%,100%{transform:translateY(-7px)}50%{transform:translateY(7px)}}
+  @keyframes menear{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
+  @keyframes rebotar{
+    0%,100%{transform:translateY(0) scale(1,1)}
+    40%{transform:translateY(-26px) scale(.94,1.06)}
+    55%{transform:translateY(-26px) scale(1.06,.94)}
+    85%{transform:translateY(0) scale(1.08,.92)}
+  }
+  @keyframes nadar{0%,100%{transform:translateX(-30px) rotate(-7deg)}50%{transform:translateX(30px) rotate(7deg)}}
+  @keyframes girar{to{transform:rotate(360deg)}}
+  @keyframes deslizar{0%{transform:translateX(-72px)}70%{transform:translateX(8px)}100%{transform:translateX(72px)}}
+  @keyframes temblar{
+    0%,100%{transform:translateX(0) rotate(0)}
+    25%{transform:translateX(-5px) rotate(-3deg)}
+    75%{transform:translateX(5px) rotate(3deg)}
+  }
+  @keyframes vapor{0%{opacity:0;transform:translateY(8px) scale(.6)}30%{opacity:.9}100%{opacity:0;transform:translateY(-54px) scale(1.3)}}
+
+  .a-latir .g{animation:aparecer .5s both, latir 1.8s ease-in-out .5s infinite}
+  .a-flotar .g{animation:aparecer .5s both, flotar 2.6s ease-in-out .5s infinite}
+  .a-menear .g{animation:aparecer .5s both, menear 1.6s ease-in-out .5s infinite}
+  .a-rebotar .g{animation:aparecer .5s both, rebotar 1.5s cubic-bezier(.5,0,.5,1) .5s infinite}
+  .a-nadar .g{animation:aparecer .5s both, nadar 3s ease-in-out .5s infinite}
+  .a-girar .g{animation:aparecer .5s both, girar 4s linear .5s infinite}
+  .a-deslizar .g{animation:aparecer .5s both, deslizar 2.6s ease-in-out .5s infinite}
+  .a-temblar .g{animation:aparecer .5s both, temblar 1.4s ease-in-out .5s infinite}
+  .a-vapor .g{animation:aparecer .5s both, flotar 2.8s ease-in-out .5s infinite}
+  .a-vapor .p{animation:vapor 2.6s ease-out infinite}
+
+  /* imagen propia sobre la escena */
+  .escena .gif{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#f7f3ea}
+  .escena.con-imagen{height:auto;min-height:160px;max-height:60vh;padding:0;background:#f7f3ea;max-width:520px;margin:10px auto 0}
+  .escena.con-imagen .g,.escena.con-imagen .p{display:none}
+
+  @media (prefers-reduced-motion: reduce){
+    .escena .g,.escena .p{animation:none !important}
+  }
+  .drill p{font-size:16px; margin:6px 0 12px}
+  .resp{margin-top:12px; padding:12px 14px; border-radius:12px; background:#f4f8f5; border:1px solid #dbe9e0}
+  .resp .hr{font-size:20px; font-weight:600}
+  .resp .es{font-size:14px; color:var(--muted)}
+  .cierre{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+  .muted{color:var(--muted); font-size:14px; margin:0}
+  .aviso{
+    background:#fff7ed; border:1px solid #f5d9b5; color:#8a4b0f;
+    border-radius:12px; padding:12px 14px; font-size:14px; margin-bottom:14px;
+  }
+  .aviso b{color:#7a3f08}
+  .diag{font-size:13px; color:var(--muted); margin-top:16px}
+  .diag summary{cursor:pointer}
+  .diag pre{white-space:pre-wrap; font-size:12px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:10px}
+  @media (max-width:520px){
+    .hero h1{font-size:23px}
+    .item .hr{font-size:18px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span>■</span> Croata · 3 minutos</div>
+  <div class="nav">
+    <button id="prev" title="Clase anterior">‹</button>
+    <span id="pos">—</span>
+    <button id="next" title="Clase siguiente">›</button>
+  </div>
+</header>
+
+<main>
+  <div id="aviso" class="aviso" hidden></div>
+
+  <section class="card hero">
+    <div class="kicker" id="kicker"></div>
+    <h1 id="titulo"></h1>
+    <p id="objetivo"></p>
+    <div class="timer">
+      <div class="clock" id="clock">3:00</div>
+      <div class="bar"><i id="barra"></i></div>
+    </div>
+    <div class="hero-actions">
+      <button class="btn primary" id="empezar">▶ Empezar la clase</button>
+      <button class="btn ghost" id="repetir">↻ Repetir todo</button>
+    </div>
+  </section>
+
+  <h2 class="sec">Frases</h2>
+  <div id="frases"></div>
+
+  <h2 class="sec">Palabras</h2>
+  <div id="palabras"></div>
+
+  <section class="card drill">
+    <div class="kicker">Mini-reto</div>
+    <p id="pregunta"></p>
+    <button class="btn ghost" id="ver">Ver respuesta</button>
+    <div class="resp" id="respuesta" hidden>
+      <div class="hr" id="resp-hr"></div>
+      <div class="es" id="resp-es"></div>
+    </div>
+  </section>
+
+  <section class="card cierre">
+    <button class="btn ok" id="hecha">✅ Clase hecha</button>
+    <p class="muted" id="estado"></p>
+  </section>
+
+  <details class="diag">
+    <summary>Diagnóstico de voz y audio</summary>
+    <pre id="diag">Comprobando…</pre>
+    <button class="btn ghost" id="probar">Probar voz</button>
+  </details>
+</main>
+
+<script src="clases.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var DATA = window.CLASES;
+  var $ = function (s) { return document.querySelector(s); };
+
+  if (!DATA || !DATA.clases || !DATA.clases.length) {
+    document.body.insertAdjacentHTML('afterbegin',
+      '<div class="aviso" style="margin:18px">No se pudo cargar <b>clases.js</b>. ' +
+      'Ejecuta <b>Herramientas\\preparar-clases.ps1</b> para generarlo.</div>');
+    return;
+  }
+
+  var CLAVES = 'hr-hechas';
+  var hechas = {};
+  try { (JSON.parse(localStorage.getItem(CLAVES) || '[]')).forEach(function (n) { hechas[n] = true; }); } catch (e) {}
+
+  var idx = 0;
+  for (var i = 0; i < DATA.clases.length; i++) {
+    if (!hechas[DATA.clases[i].n]) { idx = i; break; }
+  }
+
+  var voces = [];
+  var audioOk = null;
+
+  // ---------- voz ----------
+  function cargarVoces() {
+    try { voces = window.speechSynthesis ? window.speechSynthesis.getVoices() : []; } catch (e) { voces = []; }
+    pintarDiag();
+  }
+  if (window.speechSynthesis) {
+    window.speechSynthesis.onvoiceschanged = cargarVoces;
+    cargarVoces();
+  }
+
+  function vozCroata() {
+    for (var i = 0; i < voces.length; i++) {
+      if (/^hr/i.test(voces[i].lang)) return voces[i];
+    }
+    return null;
+  }
+
+  function hablar(texto, velocidad) {
+    return new Promise(function (resolve) {
+      if (!window.speechSynthesis) { return resolve(); }
+      var u = new SpeechSynthesisUtterance(texto);
+      var v = vozCroata();
+      if (v) u.voice = v;
+      u.lang = 'hr-HR';
+      u.rate = velocidad || 0.9;
+      var acabo = false;
+      function fin() { if (!acabo) { acabo = true; resolve(); } }
+      u.onend = fin; u.onerror = fin;
+      try { window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } catch (e) { return fin(); }
+      setTimeout(fin, 9000);
+    });
+  }
+
+  // ---------- audio local ----------
+  function reproducir(item, lento) {
+    return new Promise(function (resolve) {
+      var url = 'audio/' + item.id + (lento ? '-slow' : '') + '.wav';
+      var a = new Audio(url);
+      var acabo = false;
+      function fin() { if (!acabo) { acabo = true; resolve(); } }
+      a.addEventListener('ended', fin, { once: true });
+      a.addEventListener('error', function () {
+        audioOk = false; pintarAviso(); pintarDiag();
+        hablar(item.hr, lento ? 0.65 : 0.9).then(fin);
+      }, { once: true });
+      var p = a.play();
+      if (p && p.catch) { p.catch(function () { /* el evento error decide */ }); }
+      setTimeout(fin, 15000);
+    });
+  }
+
+  function sondearAudio() {
+    var primero = DATA.clases[0].frases[0];
+    var a = new Audio('audio/' + primero.id + '.wav');
+    a.addEventListener('loadedmetadata', function () { audioOk = true; pintarAviso(); pintarDiag(); }, { once: true });
+    a.addEventListener('error', function () { audioOk = false; pintarAviso(); pintarDiag(); }, { once: true });
+    a.load();
+  }
+
+  // ---------- avisos ----------
+  function pintarAviso() {
+    var el = $('#aviso');
+    if (audioOk !== false) { el.hidden = true; el.innerHTML = ''; return; }
+    var hr = vozCroata();
+    var msg = '<b>Faltan los audios de las clases.</b> Ejecuta ' +
+      '<code>Herramientas\\generar-audio.ps1</code> con la voz croata instalada. ';
+    if (hr) {
+      msg += 'Mientras tanto se usará la voz del sistema (' + hr.name + ').';
+    } else {
+      msg += 'Además, este navegador no encuentra ninguna <b>voz croata</b>, ' +
+             'así que ahora mismo no hay pronunciación correcta disponible.';
+    }
+    el.innerHTML = msg;
+    el.hidden = false;
+  }
+
+  function pintarDiag() {
+    var hr = vozCroata();
+    var lineas = [
+      'Clases cargadas: ' + DATA.clases.length,
+      'Archivos de audio: ' + (audioOk === null ? 'comprobando…' : (audioOk ? 'OK' : 'no encontrados')),
+      'Voces del navegador: ' + (voces.length ? voces.length : 0),
+      'Voz croata: ' + (hr ? hr.name + ' (' + hr.lang + ')' : 'NO DISPONIBLE')
+    ];
+    var otras = voces.filter(function (v) { return /^hr/i.test(v.lang); })
+      .map(function (v) { return '  · ' + v.name + ' — ' + v.lang; });
+    if (otras.length) { lineas.push('Voces hr:'); lineas = lineas.concat(otras); }
+    $('#diag').textContent = lineas.join('\n');
+  }
+
+  // ---------- pintado ----------
+  function actual() { return DATA.clases[idx]; }
+
+  function visualDe(id) {
+    var v = window.VISUALES && window.VISUALES[id];
+    return (v && v.length === 2) ? v : ['✨', 'latir'];
+  }
+
+  function imagenDe(id) {
+    var m = window.IMAGENES && window.IMAGENES[id];
+    return (m && m.src) ? m : null;
+  }
+
+  function itemHTML(item) {
+    var v = visualDe(item.id);
+    var emoji = v[0], anim = v[1];
+    var img = imagenDe(item.id);
+    var estilo = img ? ' style="aspect-ratio:' + img.w + '/' + img.h + '"' : '';
+    var capa = img ? '<img class="gif" src="' + img.src + '" alt="">' : '';
+    return '<div class="item" data-id="' + item.id + '" data-hr="' + item.hr.replace(/"/g, '&quot;') + '">' +
+      '<div class="linea">' +
+      '<button class="mini" data-vis="' + item.id + '" title="Ver animación" ' +
+      'aria-label="Ver animación de ' + item.hr.replace(/"/g, '') + '">' + emoji + '</button>' +
+      '<div class="txt"><div class="hr">' + item.hr + '</div>' +
+      '<div class="es">' + item.es + '</div></div>' +
+      '<div class="acts">' +
+      '<button class="play" data-act="play" title="Escuchar" aria-label="Escuchar">▶</button>' +
+      '<button class="play slow" data-act="slow" title="Más despacio" aria-label="Más despacio">🐢</button>' +
+      '</div>' +
+      '</div>' +
+      '<div class="escena a-' + anim + (img ? ' con-imagen' : '') + '" data-escena="' + item.id + '" hidden' + estilo + '>' +
+      '<span class="g">' + emoji + '</span>' +
+      '<span class="p p1">✨</span><span class="p p2">✨</span>' + capa +
+      '</div>' +
+      '</div>';
+  }
+
+  function pintar() {
+    var c = actual();
+    $('#kicker').textContent = hechas[c.n] ? 'Clase hecha' : 'Clase pendiente';
+    $('#titulo').textContent = 'Clase ' + c.n + ' · ' + c.titulo;
+    $('#objetivo').textContent = c.objetivo;
+    $('#pos').textContent = 'Clase ' + c.n + ' de ' + DATA.clases.length;
+
+    var f = '';
+    c.frases.forEach(function (x) { f += itemHTML(x); });
+    $('#frases').innerHTML = f;
+
+    var p = '';
+    c.palabras.forEach(function (x) { p += itemHTML(x); });
+    $('#palabras').innerHTML = p;
+
+    $('#pregunta').textContent = c.drill.pregunta;
+    $('#resp-hr').textContent = c.drill.respuesta;
+    $('#resp-es').textContent = c.drill.es;
+    $('#respuesta').hidden = true;
+    $('#ver').textContent = 'Ver respuesta';
+
+    $('#estado').textContent = hechas[c.n]
+      ? 'Esta clase ya está marcada como hecha. Puedes repetirla las veces que quieras.'
+      : 'Cuando termines, márcala como hecha para que la app pase a la siguiente.';
+
+    reiniciarReloj();
+    pintarAviso();
+    pintarDiag();
+  }
+
+  // ---------- temporizador ----------
+  var RESTANTE = 180, tick = null;
+
+  function formatear(s) {
+    var m = Math.floor(s / 60), r = s % 60;
+    return m + ':' + (r < 10 ? '0' : '') + r;
+  }
+  function pintarReloj() {
+    $('#clock').textContent = formatear(Math.max(0, RESTANTE));
+    $('#barra').style.width = (Math.max(0, RESTANTE) / 180 * 100) + '%';
+  }
+  function reiniciarReloj() {
+    if (tick) { clearInterval(tick); tick = null; }
+    RESTANTE = 180; pintarReloj();
+    $('#empezar').textContent = '▶ Empezar la clase';
+  }
+  function arrancarReloj() {
+    if (tick) return;
+    tick = setInterval(function () {
+      RESTANTE--;
+      pintarReloj();
+      if (RESTANTE <= 0) {
+        clearInterval(tick); tick = null;
+        $('#empezar').textContent = '⏱ 3 minutos cumplidos';
+      }
+    }, 1000);
+  }
+
+  // ---------- reproducción ----------
+  function marcarSonando(el, on) {
+    document.querySelectorAll('.item.sonando').forEach(function (n) { n.classList.remove('sonando'); });
+    if (on && el) el.classList.add('sonando');
+  }
+
+  function listaDeLaClase() {
+    var c = actual();
+    return c.frases.concat(c.palabras, [{ id: c.drill.id, hr: c.drill.respuesta, es: c.drill.es }]);
+  }
+
+  async function todaLaClase() {
+    var items = listaDeLaClase();
+    for (var i = 0; i < items.length; i++) {
+      var el = document.querySelector('.item[data-id="' + items[i].id + '"]');
+      marcarSonando(el, true);
+      await reproducir(items[i], false);
+      await new Promise(function (r) { setTimeout(r, 320); });
+    }
+    marcarSonando(null, false);
+  }
+
+  // ---------- eventos ----------
+  document.addEventListener('click', function (e) {
+    var mini = e.target.closest('button.mini');
+    if (mini) {
+      var caja = mini.closest('.item');
+      var escena = caja.querySelector('.escena');
+      var cerrar = !escena.hidden;
+      escena.hidden = cerrar;
+      caja.classList.toggle('abierto', !cerrar);
+      return;
+    }
+
+    var b = e.target.closest('button.play');
+    if (!b) return;
+    var cont = b.closest('.item');
+    marcarSonando(cont, true);
+    reproducir({ id: cont.dataset.id, hr: cont.dataset.hr }, b.dataset.act === 'slow')
+      .then(function () { marcarSonando(null, false); });
+  });
+
+  $('#empezar').addEventListener('click', function () {
+    arrancarReloj();
+    var r = document.querySelector('#respuesta');
+    if (!r.hidden) { $('#ver').click(); }
+    todaLaClase();
+  });
+
+  $('#repetir').addEventListener('click', function () { todaLaClase(); });
+
+  $('#ver').addEventListener('click', function () {
+    var c = actual();
+    $('#respuesta').hidden = false;
+    $('#ver').textContent = 'Escuchar la respuesta';
+    reproducir({ id: c.drill.id, hr: c.drill.respuesta }, false);
+  });
+
+  $('#hecha').addEventListener('click', function () {
+    var c = actual();
+    hechas[c.n] = true;
+    try { localStorage.setItem(CLAVES, JSON.stringify(Object.keys(hechas).map(Number))); } catch (e) {}
+    $('#estado').textContent = '¡Clase ' + c.n + ' hecha! La próxima vez que abras la página empezará la siguiente.';
+    $('#kicker').textContent = 'Clase hecha';
+  });
+
+  $('#prev').addEventListener('click', function () {
+    idx = (idx - 1 + DATA.clases.length) % DATA.clases.length;
+    pintar();
+  });
+  $('#next').addEventListener('click', function () {
+    idx = (idx + 1) % DATA.clases.length;
+    pintar();
+  });
+
+  $('#probar').addEventListener('click', function () {
+    hablar('Dobar dan. Ja sam Ana. Hvala lijepo.', 0.9);
+  });
+
+  // ---------- arranque ----------
+  pintar();
+  sondearAudio();
+  setTimeout(pintarDiag, 1200);
+})();
+</script>
+</body>
+</html>
